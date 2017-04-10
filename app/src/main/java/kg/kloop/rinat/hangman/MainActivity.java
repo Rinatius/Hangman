@@ -2,6 +2,7 @@ package kg.kloop.rinat.hangman;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView lettersView;
     private EditText guessView;
     private Button submitButton;
+    private HangManController hangManController;
+    private HangManView hangManView;
+    private HangManModel hangManModel;
 
 
     @Override
@@ -21,6 +25,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update();
+            }
+        });
+
+        hangManController.setWord("zagadka");
+
+    }
+
+    private void update() {
+        hangManController.acceptGuess(guessView.getText().toString());
+        hangManView.update(hangManModel);
+        gallowsView.setText(hangManView.getGallows());
+        wordView.setText(hangManView.getWord());
+        lettersView.setText(hangManView.getLetters());
+
     }
 
     private void init() {
@@ -29,5 +52,9 @@ public class MainActivity extends AppCompatActivity {
         lettersView = (TextView)findViewById(R.id.textViewLetters);
         guessView = (EditText)findViewById(R.id.editTextGuess);
         submitButton = (Button)findViewById(R.id.buttonSubmit);
+
+        hangManModel = new HangManModel();
+        hangManController = new HangManController(hangManModel);
+        hangManView = new HangManView();
     }
 }
