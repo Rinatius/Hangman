@@ -8,6 +8,7 @@ class HangManModel {
     private String word;
     private int gallowPart;
     private String riddle;
+    private String letters;
 
     public void setWord(String word) {
         this.word = word;
@@ -31,5 +32,13 @@ class HangManModel {
 
     public void setRiddle(String riddle) {
         this.riddle = riddle;
+    }
+
+    public String getLetters() {
+        return letters;
+    }
+
+    public void setLetters(String letters) {
+        this.letters = letters;
     }
 }

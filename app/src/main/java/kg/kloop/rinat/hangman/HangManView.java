@@ -23,6 +23,9 @@ class HangManView {
     }
 
     public void update(HangManModel hangManModel) {
+        gallows = String.valueOf(hangManModel.getGallowPart());
+        riddle = hangManModel.getRiddle();
+        letters = hangManModel.getLetters();
 
     }
 }

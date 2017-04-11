@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private HangManController hangManController;
     private HangManView hangManView;
     private HangManModel hangManModel;
+    private String word;
 
 
     @Override
@@ -33,16 +34,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        hangManController.setWord("zagadka");
+        word = "zagadka";
+        hangManController.setWord(word);
+
+        hiddenRiddle(); // change letters in riddle to "-"
+        hangManController.setRiddle(hiddenRiddle());
 
     }
+
+
 
     private void update() {
         hangManController.acceptGuess(guessView.getText().toString().charAt(0));
         hangManView.update(hangManModel);
         gallowsView.setText(hangManView.getGallows());
         wordView.setText(hangManView.getRiddle());
-        lettersView.setText(hangManView.getLetters());
+        lettersView.setText(String.valueOf(hangManView.getLetters()));
+
+
+    }
+    private String hiddenRiddle() {
+        int i = 0;
+        char [] riddle = word.toCharArray();
+        for (char letter : riddle){
+            riddle[i] = '-';
+            i++;
+        }
+        return new String (riddle);
 
     }
 
