@@ -18,7 +18,7 @@ class HangManController {
     }
 
     public void acceptGuess(char letter) {
-        if (model.getWord().contains(letter)){
+        if (model.getWord().indexOf(letter) >= 0){
             showLetter(letter);
         } else model.setGallowPart(model.getGallowPart() + 1);
     }
